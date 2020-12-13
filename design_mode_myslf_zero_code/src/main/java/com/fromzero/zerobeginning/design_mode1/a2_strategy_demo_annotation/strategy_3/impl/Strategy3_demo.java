@@ -1,8 +1,8 @@
 package com.fromzero.zerobeginning.design_mode1.a2_strategy_demo_annotation.strategy_3.impl;
 
 
+import com.fromzero.zerobeginning.design_mode1.a2_strategy_demo_annotation.StrategyAnno;
 import com.fromzero.zerobeginning.design_mode1.a2_strategy_demo_annotation.strategy_3.Strategy3Handler;
-import com.fromzero.zerobeginning.design_mode1.b_factory_mode.Factory1;
 import com.fromzero.zerobeginning.entity.GuiHuaFu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
  */
 
 @Component
+@StrategyAnno("strategy3")
 public class Strategy3_demo implements Strategy3Handler {
 
     private static Logger LOG = LoggerFactory.getLogger(Strategy3_demo.class);
@@ -51,6 +52,6 @@ public class Strategy3_demo implements Strategy3Handler {
     @Autowired
     @PostConstruct
     public void afterPropertiesSet() throws Exception {
-        Factory1.register("strategy1",this);
+        //Factory1.register("strategy3",this);//使用注解注册
     }
 }

@@ -2,6 +2,7 @@ package com.fromzero.zerobeginning.design_mode1.a1_strategy_demo_ordinary.strate
 
 
 import com.fromzero.zerobeginning.design_mode1.a1_strategy_demo_ordinary.strategy_1.Strategy1Handler;
+import com.fromzero.zerobeginning.design_mode1.a2_strategy_demo_annotation.StrategyAnno;
 import com.fromzero.zerobeginning.design_mode1.b_factory_mode.Factory1;
 import com.fromzero.zerobeginning.entity.GuiHuaFu;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class Strategy1_demo implements Strategy1Handler {
     private static Logger LOG = LoggerFactory.getLogger(Strategy1_demo.class);
 
     @Override
+    @StrategyAnno("abc")
     public void method1() {
         LOG.info(GuiHuaFu.横线 +"策略方法1：AAAAAAAAAA");
     }

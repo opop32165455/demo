@@ -42,8 +42,19 @@ public class DesignModeApplicationTests {
             e.printStackTrace();//很容易空指针
         }
     }
-
-
+    //通过注解的方式 注册的策略
+    @Test
+    public void doStrategy3(){
+        try {
+            Handler handler = Factory1.getInvokeStategy("strategy3");//选择面条种类
+            handler.method1();//揉面
+            handler.method2();//做面条
+            handler.method3();//下面/doge
+            handler.method4();//辣椒
+        } catch (Exception e) {
+            e.printStackTrace();//很容易空指针
+        }
+    }
     @Test
     public void doStrategy4(){
         try {

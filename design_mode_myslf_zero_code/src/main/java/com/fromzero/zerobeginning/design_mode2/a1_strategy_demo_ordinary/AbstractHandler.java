@@ -11,7 +11,7 @@ public abstract class AbstractHandler implements InitializingBean {
     public abstract void method1();
 
     public abstract void method2();
-
+    //抽象方法 子类必须重写 比较面条必须得揉面呀
     public abstract void method3();
 
     public abstract void method4();
