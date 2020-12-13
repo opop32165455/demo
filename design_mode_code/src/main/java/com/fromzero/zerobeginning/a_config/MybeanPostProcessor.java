@@ -18,7 +18,7 @@ public class MybeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
-
+    //初始化的时候 搜索脑袋上带StrategyAnno注解的 把注解里面的值作为key 内容作为value 注册进去
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         StrategyAnno annotation = bean.getClass().getAnnotation(StrategyAnno.class);
