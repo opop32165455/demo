@@ -1,0 +1,46 @@
+server:
+  port: 8080
+spring:
+  kafka:
+    bootstrap-servers: hdb3:9092
+    #  zookeeper:
+     #   connect: hdp3:2181,hdp4:2181,hdp5:2181
+    producer:
+      retries: 0
+      #每次批量发送数据的数量
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: spring-boot-demo
+      # 手动提交
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session.timeout.ms: 60000
+    listener:
+      log-container-config: false
+      concurrency: 5
+      # 手动提交
+      ack-mode: manual_immediate
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/windows_test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: NOT_EMPTY
+      db-type: MYSQL
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
