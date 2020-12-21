@@ -7,6 +7,17 @@ spring:
     username: root
     password:
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 192.168.59.80
+    port: 6379
+    database: 10
+    timeout: 30000
+    jedis:
+      pool:
+        max-idle: 100
+        min-idle: 10
+    password: anteater@!@!*
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   global-config:

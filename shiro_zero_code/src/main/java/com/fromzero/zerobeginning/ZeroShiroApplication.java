@@ -9,7 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZeroShiroApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ZeroShiroApplication.class, args);
+        try {
+            SpringApplication.run(ZeroShiroApplication.class, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
