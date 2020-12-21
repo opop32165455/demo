@@ -24,6 +24,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MyShiroToken extends UsernamePasswordToken implements Serializable {
 
+    private String stringPassword;
 
     private String tokenCustomAttribute1;
 
@@ -32,6 +33,16 @@ public class MyShiroToken extends UsernamePasswordToken implements Serializable 
     private String tokenCustomAttribute3;
 
     private String tokenCustomAttribute4;
+
+    public void setStringPassword(String stringPassword) {
+        this.stringPassword = String.valueOf(super.getPassword());
+    }
+    /**
+     * 因为父类的password是char类型 这里强行写成string 避免麻烦
+     */
+    public String getStringPassword() {
+        return String.valueOf(this.getPassword());
+    }
 
     public MyShiroToken(String email, String password) {
         super(email,password);
@@ -43,10 +54,5 @@ public class MyShiroToken extends UsernamePasswordToken implements Serializable 
         this.tokenCustomAttribute2=tokonFilter2;
     }
 
-    /**
-     * 因为父类的password是char类型 这里强行写成string 避免麻烦
-     */
-    public String getStringPassword() {
-        return String.valueOf(this.getPassword());
-    }
+
 }

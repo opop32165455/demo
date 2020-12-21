@@ -5,12 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.service.SysUserService;
-import com.fromzero.zerobeginning.shiro.domain.DatawShiroToken;
 import com.fromzero.zerobeginning.shiro.domain.MyAuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import com.fromzero.zerobeginning.shiro.domain.MyShiroToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -68,7 +65,8 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
         //接受到shiro管理的用户tokon
-         DatawShiroToken loginToken = (DatawShiroToken) authenticationToken;
+        MyShiroToken loginToken = (MyShiroToken) authenticationToken;
+        //UsernamePasswordToken loginToken = (UsernamePasswordToken) authenticationToken;
         //DatawShiroToken loginToken = null;
         if (StringUtils.isEmpty(authenticationToken.getPrincipal())) {
             return null;

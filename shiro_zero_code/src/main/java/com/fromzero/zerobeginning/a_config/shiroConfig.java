@@ -166,8 +166,11 @@ public class shiroConfig {
             //, @Qualifier("sessionManager") CustomSessionManager sessionManager
     ) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // 自定义缓存实现 使用redis
+        securityManager.setCacheManager(cacheManager());
+        // 自定义session管理 使用redis
+        securityManager.setSessionManager(sessionManager());
         //securityManager.setRememberMeManager(rememberMeManager);
-        //securityManager.setSessionManager(sessionManager);
         securityManager.setRealm(myShiroRealm);
         return securityManager;
     }
@@ -195,7 +198,7 @@ public class shiroConfig {
         map.put("/css/**", "anon");
         map.put("/open/**", "anon");
         map.put("/static/**", "anon");
-        map.put("/login", "tokenFilter,anon");
+        map.put("/login", "anon");
 
         //登出
         map.put("/logout", "logout");

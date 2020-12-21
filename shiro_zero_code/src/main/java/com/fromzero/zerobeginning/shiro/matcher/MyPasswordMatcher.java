@@ -1,11 +1,11 @@
 package com.fromzero.zerobeginning.shiro.matcher;
 
 import com.fromzero.zerobeginning.entity.SysUser;
+import com.fromzero.zerobeginning.shiro.domain.MyAuthenticationInfo;
+import com.fromzero.zerobeginning.shiro.domain.MyShiroToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +25,12 @@ public class MyPasswordMatcher implements CredentialsMatcher {
      */
     @Override
     public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {
-        UsernamePasswordToken tokon = (UsernamePasswordToken) authenticationToken;
-        String loginUserPassword = String.valueOf(tokon.getPassword());
+        //类型转换异常 配置redis缓存 解决
+        MyShiroToken tokon = (MyShiroToken) authenticationToken;
+        //String loginUserPassword = String.valueOf(tokon.getPassword());
+        String loginUserPassword = tokon.getStringPassword();
         boolean matches = false;
-        SimpleAuthenticationInfo dataBaseInfo = (SimpleAuthenticationInfo) authenticationInfo;
+        MyAuthenticationInfo dataBaseInfo = (MyAuthenticationInfo) authenticationInfo;
         Object subject = SecurityUtils.getSubject();
         //PrincipalCollection getPrincipals中PrimaryPrincipal封裝了用户信息
         SysUser DataBaseUser = (SysUser) dataBaseInfo.getPrincipals().getPrimaryPrincipal();
