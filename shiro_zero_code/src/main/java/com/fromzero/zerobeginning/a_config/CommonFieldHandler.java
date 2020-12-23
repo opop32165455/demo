@@ -25,6 +25,7 @@ public class CommonFieldHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
+        //配置注解 则该字段自动设置时间
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("lastUpdateTime", new Date(), metaObject);
     }

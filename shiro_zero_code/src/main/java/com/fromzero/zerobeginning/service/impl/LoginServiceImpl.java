@@ -1,7 +1,6 @@
 package com.fromzero.zerobeginning.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.service.LoginService;
 import com.fromzero.zerobeginning.shiro.service.ShiroTokenService;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,8 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean login(SysUser LoginUserInfo, Boolean isRememberMe) throws Exception {
-
+        //进行登陆
         SysUser loginUser = shiroTokenService.login(LoginUserInfo, isRememberMe);
-
-        SysUser token = shiroTokenService.getToken();
         if (ObjectUtil.isNotNull(loginUser)) {
             return true;
         }

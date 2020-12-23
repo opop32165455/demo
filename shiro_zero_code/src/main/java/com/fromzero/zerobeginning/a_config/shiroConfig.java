@@ -5,6 +5,7 @@ import com.fromzero.zerobeginning.shiro.filter.TokenFilter;
 import com.fromzero.zerobeginning.shiro.matcher.MyPasswordMatcher;
 import com.fromzero.zerobeginning.shiro.realm.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -42,6 +43,7 @@ public class shiroConfig {
         defaultAAP.setProxyTargetClass(true);
         return defaultAAP;
     }
+
     /**
      * cacheManager 缓存 redis实现
      * 使用的是shiro-redis开源插件
@@ -154,6 +156,7 @@ public class shiroConfig {
         return myRealm;
     }
 
+
     /**
      * @param myShiroRealm 自定义 权限认证+登陆验证
      *                     // * @param rememberMeManager 设置关闭浏览器记住面膜
@@ -161,15 +164,13 @@ public class shiroConfig {
      * @return 权限管理器
      */
     @Bean
-    public SecurityManager securityManager(@Qualifier("customRealm") MyRealm myShiroRealm
-           // , @Qualifier("rememberMeManager") CookieRememberMeManager rememberMeManager
-            //, @Qualifier("sessionManager") CustomSessionManager sessionManager
-    ) {
+    public SecurityManager securityManager(@Qualifier("customRealm") MyRealm myShiroRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 自定义缓存实现 使用redis
         securityManager.setCacheManager(cacheManager());
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager());
+        //设置记住登陆状态
         //securityManager.setRememberMeManager(rememberMeManager);
         securityManager.setRealm(myShiroRealm);
         return securityManager;
@@ -202,7 +203,9 @@ public class shiroConfig {
 
         //登出
         map.put("/logout", "logout");
-        map.put("/**", "anon");
+
+
+        map.put("/**", "user");
 
         //配置默认登录url
         shiroFilterFactoryBean.setLoginUrl("/login.html");
@@ -219,12 +222,12 @@ public class shiroConfig {
      * @param securityManager 验证管理器
      * @return 开启权限注解功能 【 @RequiresPermissions("userInfo:test") 】
      */
-    //@Bean
-    //public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
-    //    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-    //    //将认证管理器交给框架
-    //    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-    //    return authorizationAttributeSourceAdvisor;
-    //}
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        //将认证管理器交给框架
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
 
 }

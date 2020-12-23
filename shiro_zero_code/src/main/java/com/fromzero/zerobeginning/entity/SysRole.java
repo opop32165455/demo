@@ -10,50 +10,29 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+
 /**
- * (SysUser)表实体类
+ * (SysRole)表实体类
  *
  * @author zxc4441
- * @since 2020-12-23 21:56:11
+ * @since 2020-12-23 21:59:55
  */
 @SuppressWarnings("serial")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("t_sys_user")
-public class SysUser extends Model<SysUser> {
+@TableName("t_sys_role")
+public class SysRole extends Model<SysRole> {
     private Integer id;
     /**
-     * 用户昵称
+     * 角色名
      */
     private String name;
     /**
-     * 登陆的账号
+     * 创建时间
      */
-    private String email;
-    private String password;
-    /**
-     * 用户组id 可以给用户分组
-     */
-    private Integer groupId;
     private Date createTime;
-    /**
-     * 最后一次登录时间 可以用来判断是否发放优惠券
-     */
-    private Date lastLoginTime;
-    /**
-     * 最后一次登录的id 可以判断异地登录
-     */
-    private String lastLoginIp;
-    /**
-     * 判断用户账号是否正常
-     */
-    private Integer status;
-    /**
-     * 用户语言
-     */
-    private String language;
 
 
     /**

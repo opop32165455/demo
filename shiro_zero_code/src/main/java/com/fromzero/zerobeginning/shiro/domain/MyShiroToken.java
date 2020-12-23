@@ -48,10 +48,10 @@ public class MyShiroToken extends UsernamePasswordToken implements Serializable 
         super(email,password);
     }
 
-    public MyShiroToken(String username, String password, boolean aBoolean, String host, String tokonFilter1, String tokonFilter2) {
+    public MyShiroToken(String username, String password, boolean aBoolean, String host, String tokenCustomAttribute1, String tokenCustomAttribute2) {
         super(username,password,aBoolean,host);
-        this.tokenCustomAttribute1=tokonFilter1;
-        this.tokenCustomAttribute2=tokonFilter2;
+        this.tokenCustomAttribute1=tokenCustomAttribute1;
+        this.tokenCustomAttribute2=tokenCustomAttribute2;
     }
 
 

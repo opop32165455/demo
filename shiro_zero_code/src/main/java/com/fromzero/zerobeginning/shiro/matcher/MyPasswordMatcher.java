@@ -1,6 +1,5 @@
 package com.fromzero.zerobeginning.shiro.matcher;
 
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.shiro.domain.MyAuthenticationInfo;
 import com.fromzero.zerobeginning.shiro.domain.MyShiroToken;
 import org.apache.shiro.SecurityUtils;

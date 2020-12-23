@@ -2,7 +2,6 @@ package com.fromzero.zerobeginning.shiro.filter;
 
 
 import com.fromzero.zerobeginning.consts.AuthResponse;
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.utils.ShiroWebUtil;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;

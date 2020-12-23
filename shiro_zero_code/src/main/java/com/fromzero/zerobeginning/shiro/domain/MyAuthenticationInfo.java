@@ -1,6 +1,5 @@
 package com.fromzero.zerobeginning.shiro.domain;
 
-import com.fromzero.zerobeginning.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

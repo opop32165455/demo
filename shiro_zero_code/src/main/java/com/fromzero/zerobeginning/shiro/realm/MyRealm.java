@@ -3,7 +3,6 @@ package com.fromzero.zerobeginning.shiro.realm;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.service.SysUserService;
 import com.fromzero.zerobeginning.shiro.domain.MyAuthenticationInfo;
 import com.fromzero.zerobeginning.shiro.domain.MyShiroToken;
@@ -82,8 +81,8 @@ public class MyRealm extends AuthorizingRealm {
             return null;
         } else {
             //这里验证authenticationToken和simpleAuthenticationInfo的信息
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new MyAuthenticationInfo(dateBaseUserInfo, "password", getName());
-            return simpleAuthenticationInfo;
+            MyAuthenticationInfo myAuthenticationInfo = new MyAuthenticationInfo(dateBaseUserInfo, "password", getName());
+            return myAuthenticationInfo;
         }
     }
 }

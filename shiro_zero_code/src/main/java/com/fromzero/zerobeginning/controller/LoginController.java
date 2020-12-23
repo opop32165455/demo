@@ -2,7 +2,6 @@ package com.fromzero.zerobeginning.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,6 +29,13 @@ public class LoginController extends ApiController {
     @Resource
     private LoginService loginService;
 
+    /**
+     * 登陆
+     *
+     * @param user 登陆用户信息 （用email 和 password 登陆）
+     * @param rememberMe 是否记住密码（默认记住）
+     * @return 登入结果
+     */
     @GetMapping("/login")
     public String login(SysUser user, @RequestParam(required = false,defaultValue ="true")String rememberMe) {
         if (StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
@@ -37,7 +43,6 @@ public class LoginController extends ApiController {
         }
         try {
             //进行验证，这里可以捕获异常，然后返回对应信息
-
            Boolean isRememberMe ="true".equals(rememberMe);
             boolean login = loginService.login(user, isRememberMe);
             // subject.checkRole("admin");
@@ -54,7 +59,6 @@ public class LoginController extends ApiController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "login success";
     }
 

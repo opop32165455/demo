@@ -1,7 +1,6 @@
 package com.fromzero.zerobeginning.shiro.service.impl;
 
 
-import com.fromzero.zerobeginning.entity.SysUser;
 import com.fromzero.zerobeginning.shiro.domain.MyShiroToken;
 import com.fromzero.zerobeginning.shiro.realm.MyRealm;
 import com.fromzero.zerobeginning.shiro.service.ShiroTokenService;
@@ -62,6 +61,7 @@ public class ShiroTokenServiceImpl implements ShiroTokenService {
         //构造一个登录使用的集中用户数据的tokon
         MyShiroToken shiroToken = new MyShiroToken(user.getEmail(), user.getPassword(),rememberMe,"host","token1","token2");
         shiroToken.setRememberMe(rememberMe);
+        //使用token进行登陆
         SecurityUtils.getSubject().login(shiroToken);
         return getToken();
     }
