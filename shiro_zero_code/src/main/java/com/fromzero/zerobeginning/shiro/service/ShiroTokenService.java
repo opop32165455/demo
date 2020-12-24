@@ -1,6 +1,7 @@
 package com.fromzero.zerobeginning.shiro.service;
 
 
+import com.fromzero.zerobeginning.entity.SysUser;
 import org.apache.shiro.session.Session;
 
 /**

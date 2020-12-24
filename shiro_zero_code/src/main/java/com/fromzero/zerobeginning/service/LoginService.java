@@ -1,5 +1,7 @@
 package com.fromzero.zerobeginning.service;
 
+import com.fromzero.zerobeginning.entity.SysUser;
+
 /**
  * @author zhangxuecheng4441
  * @date 2020/12/16/016 15:39
