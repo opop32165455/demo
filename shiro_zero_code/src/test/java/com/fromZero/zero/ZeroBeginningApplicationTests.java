@@ -3,9 +3,12 @@ package com.fromZero.zero;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
-import com.fromZero.zero.dao.SysPermissionDao;
-import com.fromZero.zero.entity.SysPermission;
-import com.fromZero.zero.shiro.service.FilterChainDefinitionService;
+import com.fromZero.zeroShiro.ZeroShiroApplication;
+import com.fromZero.zeroShiro.dao.SysPermissionDao;
+import com.fromZero.zeroShiro.dao.SysUserDao;
+import com.fromZero.zeroShiro.entity.SysPermission;
+import com.fromZero.zeroShiro.entity.SysUser;
+import com.fromZero.zeroShiro.shiro.service.FilterChainDefinitionService;
 import org.apache.shiro.config.Ini;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +29,8 @@ public class ZeroBeginningApplicationTests {
     SysPermissionDao sysPermissionDao;
     @Resource
     FilterChainDefinitionService filterChainDefinitionService;
+    @Resource
+    SysUserDao sysUserDao;
 
     @Test
     public void contextLoads() {
@@ -40,7 +45,7 @@ public class ZeroBeginningApplicationTests {
         //        }
         //).forEach(System.out::println);
 
-      //  System.out.println(StrUtil.replace(test, "\"", "\'"));
+        //  System.out.println(StrUtil.replace(test, "\"", "\'"));
 
 
         // System.out.println("1");
@@ -57,8 +62,9 @@ public class ZeroBeginningApplicationTests {
         //返回 url1=login,oleOrFilter,权限名1 /r/n url2=login,oleOrFilter,权限名2 ...
         System.out.println(stringBuffer.toString());
     }
+
     @Test
-    public void testLoadIni(){
+    public void testLoadIni() {
         String fileName = "shiro_auth.ini";
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
         Ini ini = new Ini();
@@ -77,8 +83,9 @@ public class ZeroBeginningApplicationTests {
         }
         System.out.println(sb.toString());
     }
+
     @Test
-    public void testLoadtxt(){
+    public void testLoadtxt() {
         String fileName = "classpath:shiro_auth.txt";
         StringBuffer sb = new StringBuffer();
         try {
@@ -98,11 +105,16 @@ public class ZeroBeginningApplicationTests {
 
 
     @Test
-    public void testChain(){
+    public void testChain() {
         filterChainDefinitionService.loadFilterChainDefinitions();
 
 
+    }
 
+    @Test
+    public void testUserDao() {
+        SysUser abc = sysUserDao.selectUserPermissionsByEmail("abc");
+        System.out.println("abc = " + abc);
     }
 
 
