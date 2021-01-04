@@ -11,4 +11,5 @@ import com.fromZero.zeroShiro.entity.SysRole;
  * @since 2020-12-23 22:10:30
  */
 public interface SysRoleDao extends BaseMapper<SysRole> {
+
 }

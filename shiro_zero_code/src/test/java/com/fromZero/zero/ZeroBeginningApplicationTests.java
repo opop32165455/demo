@@ -5,8 +5,10 @@ import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fromZero.zeroShiro.ZeroShiroApplication;
 import com.fromZero.zeroShiro.dao.SysPermissionDao;
+import com.fromZero.zeroShiro.dao.SysRoleDao;
 import com.fromZero.zeroShiro.dao.SysUserDao;
 import com.fromZero.zeroShiro.entity.SysPermission;
+import com.fromZero.zeroShiro.entity.SysRole;
 import com.fromZero.zeroShiro.entity.SysUser;
 import com.fromZero.zeroShiro.shiro.service.FilterChainDefinitionService;
 import org.apache.shiro.config.Ini;
@@ -18,8 +20,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SpringBootTest(classes = ZeroShiroApplication.class)
 @RunWith(SpringRunner.class)
@@ -31,6 +35,8 @@ public class ZeroBeginningApplicationTests {
     FilterChainDefinitionService filterChainDefinitionService;
     @Resource
     SysUserDao sysUserDao;
+    @Resource
+    SysRoleDao sysRoleDao;
 
     @Test
     public void contextLoads() {
@@ -113,8 +119,23 @@ public class ZeroBeginningApplicationTests {
 
     @Test
     public void testUserDao() {
-        SysUser abc = sysUserDao.selectUserPermissionsByEmail("abc");
-        System.out.println("abc = " + abc);
+        Set<String> roles = new LinkedHashSet<>();
+       // Set<String> permissions = new LinkedHashSet<>();
+        //查询该用户信息
+        SysUser sysUser = sysUserDao.selectUserPermissionsByEmail("abc");
+        //分配权限
+        Set<String> permissions = sysUser.getRoles()
+                .stream()
+                //添加角色信息
+                .peek(role -> roles.add(role.getName()))
+                .map(SysRole::getPermissions)
+                //.map(set -> set.stream().peek(permission -> permissions.add(permission.getName())))
+                .flatMap(a -> a.stream().map(SysPermission::getName))
+                .collect(Collectors.toSet());
+        System.out.println("roles = " + roles);
+        System.out.println("permissions=" + permissions);
+
+
     }
 
 

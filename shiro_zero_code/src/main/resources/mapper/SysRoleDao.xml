@@ -4,6 +4,4 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fromZero.zeroShiro.dao.SysRoleDao">
 
-
-
 </mapper>

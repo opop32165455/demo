@@ -21,10 +21,10 @@ import javax.annotation.Resource;
  * @author R4441
  * @Desciption:
  * @Auther: ZhangXueCheng4441
- * @Date:2020/12/2/002 21:00
+ * @Date:2020/12/2/002 22:00
  */
-@RestController
 @Slf4j
+@RestController
 @RequestMapping
 public class LoginController extends ApiController {
     @Resource

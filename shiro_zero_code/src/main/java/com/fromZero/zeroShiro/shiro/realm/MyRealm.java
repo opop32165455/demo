@@ -3,6 +3,9 @@ package com.fromZero.zeroShiro.shiro.realm;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fromZero.zeroShiro.dao.SysUserDao;
+import com.fromZero.zeroShiro.entity.SysPermission;
+import com.fromZero.zeroShiro.entity.SysRole;
 import com.fromZero.zeroShiro.entity.SysUser;
 import com.fromZero.zeroShiro.service.SysUserService;
 import com.fromZero.zeroShiro.shiro.domain.MyAuthenticationInfo;
@@ -19,6 +22,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author zxc
@@ -30,59 +34,39 @@ public class MyRealm extends AuthorizingRealm {
 
     @Resource
     private SysUserService sysUserService;
+    @Resource
+    private SysUserDao sysUserDao;
 
-    /**
-     * @MethodName doGetAuthorizationInfo
-     * @Description 权限配置类
-     * @Param [principalCollection]
-     * @Return AuthorizationInfo
-     * @Author WangShiLin
-     */
     /**
      * 权限配置类
      *
-     * @param principalCollection 登陆
+     * @param principalCollection 登陆者信息
      * @return AuthorizationInfo 权限信息
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //获取登录用户
-        String userEmail = (String) principalCollection.getPrimaryPrincipal();
-        //查询用户名称
-        //SQL
+        //获取登录用户 todo
+        // MyPrincipalCollection myPrincipalCollection =  (MyPrincipalCollection) principalCollection;
+        // String userEmail = (String) myPrincipalCollection.getPrimaryPrincipal();
+        SysUser user = (SysUser) principalCollection.getPrimaryPrincipal();
+
         //添加角色和权限
         MyAuthorizationInfo myAuthorizationInfo = new MyAuthorizationInfo();
         Set<String> roles = new LinkedHashSet<>();
-        Set<String> promissions = new LinkedHashSet<>();
+        //查询该用户信息
+        SysUser sysUser = sysUserDao.selectUserPermissionsByEmail(user.getEmail());
+        Set<String> permissions = sysUser.getRoles()
+                .stream()
+                //添加角色信息
+                .peek(role -> roles.add(role.getName()))
+                .map(SysRole::getPermissions)
+                //添加权限信息
+                .flatMap(a -> a.stream().map(SysPermission::getName))
+                .collect(Collectors.toSet());
 
-
-
-
-        //Set<SysRole> sysRoles = sysUser.getRoles();
-        //for(SysRole sysRole : sysRoles){
-        //    roles.add(sysRole.getName());
-        //    List<SysPermission> promissionList = sysRole.getPermissions();
-        //    if(promissionList != null){
-        //        for(SysPermission SysPermission : promissionList){
-        //            promissions.add(SysPermission.getUrl());
-        //        }
-        //    }
-        //}
-        //info.setRoles(roles);
-        //info.setStringPermissions(promissions);
-        //return info;
-        //sql 获取用户所对应的角色
-
-        //添加角色
-        //simpleAuthorizationInfo.addRole(role.getName());
-
-        //sql 获取角色对应的权限
-        //添加权限
-        //for (SysPermission permissions : role.getPermissions()) {
-        //    simpleAuthorizationInfo.addStringPermission(permissions.getName());
-        //}
-
-        return null;
+        myAuthorizationInfo.setRoles(roles);
+        //myAuthorizationInfo.setStringPermissions(permissions);
+        return myAuthorizationInfo;
     }
 
     /**

@@ -10,8 +10,7 @@
 
 /#/login=anon
 /logout=logout
-/app/logout=anon
-/app/login=anon
+/login=anon
 
 //需要添加放行url 写在此行以上
 #anon 可以匿名访问

@@ -12,13 +12,20 @@ import javax.servlet.ServletResponse;
  *  role和permission校验是重复的 选择一个就行 最合适的是role
  *  权限数据以及在导入角色设置过了
  *
- * 一个角色满足，即可访问
- * @author lin
- * @since 2017/4/7.
+ * @author R4441
+ * @Desciption:
+ * @Auther: ZhangXueCheng4441
+ * @Date:2020/12/2/002 22:32
  */
-
-public class RoleOrFilter extends AuthorizationFilter {
-    //拦截到了 发现没有角色
+public class RoleFilter extends AuthorizationFilter {
+    /**
+     *
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
+     * @throws Exception
+     */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         Subject subject = getSubject(request, response);

@@ -27,17 +27,18 @@ import java.util.*;
  * @author zxc4441
  * @since 2020-12-23 21:59:55
  */
-@Service
+@Service(value = "filterChainDefinitionService")
 public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionService {
 
     private static final Logger LOG = LoggerFactory.getLogger(FilterChainDefinitionServiceImpl.class);
-    
+
     private static final String CRLF = "\r\n";
     private static final String EQ = "=";
     private static final String FILTER1 = "//";
     private static final String FILTER2 = "#";
     private static final String TXT_FILE_NAME = "shiro_auth.txt";
     private static final String INI_FILE_NAME = "shiro_auth.ini";
+    private static final String LOGIN_ROLE_FILTER = "login,role";
 
     /**
      * 其余角色权限分配
@@ -68,7 +69,6 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
                 .append(getDbAuthRule())
                 //配置其余权限
                 .append(LAST_AUTH_CHAIN);
-
         String chain = sb.toString();
         LOG.info("chain:[{}]", chain);
         return chain;
@@ -97,8 +97,6 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
     //获得权限
 
     /**
-     *
-     *
      * @return
      */
     private String getDbAuthRule() {
@@ -110,13 +108,13 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
             String url = sysPermission.getUrl();
             List<String> roleList = sysPermissionDao.selectRoleByPermissionId(sysPermission.getId());
             String rolesString = roleList.toString();
-            stringBuffer.append(url).append(EQ).append(rolesString).append(CRLF);
+            stringBuffer.append(url).append(EQ).append(LOGIN_ROLE_FILTER).append(rolesString).append(CRLF);
 
         }
-        //返回  /app/list/**=[superManager, MiaoWaZhongZi, HuoQiuShu, YuanQiEr]
-        //     /app/add/**=[superManager, MiaoWaZhongZi]
-        //     /app/update/**=[superManager, HuoQiuShu]
-        //     /app/delete/**=[superManager, YuanQiEr]
+        //返回  /app/list/**=login,role[superManager, MiaoWaZhongZi, HuoQiuShu, YuanQiEr]
+        //     /app/add/**=login,role[superManager, MiaoWaZhongZi]
+        //     /app/update/**=login,role[superManager, HuoQiuShu]
+        //     /app/delete/**=login,role[superManager, YuanQiEr]
         return stringBuffer.toString();
     }
 

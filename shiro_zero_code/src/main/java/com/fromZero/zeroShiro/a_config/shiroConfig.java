@@ -1,12 +1,15 @@
 package com.fromZero.zeroShiro.a_config;
 
 
-import com.fromZero.zeroShiro.shiro.filter.TokenFilter;
+import com.fromZero.zeroShiro.shiro.filter.LoginFilter;
+import com.fromZero.zeroShiro.shiro.filter.RoleFilter;
 import com.fromZero.zeroShiro.shiro.matcher.MyPasswordMatcher;
 import com.fromZero.zeroShiro.shiro.realm.MyRealm;
+import com.fromZero.zeroShiro.shiro.service.FilterChainDefinitionService;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
@@ -20,8 +23,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @Desciption:
@@ -184,36 +185,46 @@ public class shiroConfig {
      * @return 权限配置注册到工厂
      */
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") SecurityManager securityManager
-    ) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") SecurityManager securityManager,
+                                                         @Qualifier("filterChainDefinitionService") FilterChainDefinitionService filterChainService) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         HashMap<String, Filter> filterHashMap = new HashMap<>(10);
-        ////自定义的token filter
-        filterHashMap.put("tokenFilter", new TokenFilter());
+        //自定义的login filter
+        filterHashMap.put("login", new LoginFilter());
+        //自定义的role filter
+        filterHashMap.put("role", new RoleFilter());
+        //添加带有rememberMe功能的filter
+        filterHashMap.put("userFilter", new UserFilter());
         shiroFilterFactoryBean.setFilters(filterHashMap);
         //设置权限管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        //设置跳转条件(已优化成api导入)
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("/js/**", "anon");
-        map.put("/css/**", "anon");
-        map.put("/open/**", "anon");
-        map.put("/static/**", "anon");
-        map.put("/login", "anon");
 
+
+        //导入权限过滤链数据(使用map的形式配置)
+        //主要必须为LinkedHashMap 权限是有顺序之分的
+        //Map<String, String> map = new LinkedHashMap<>();
+        //map.put("/js/**", "anon");
+        //map.put("/css/**", "anon");
+        //map.put("/open/**", "anon");
+        //map.put("/static/**", "anon");
+        //map.put("/login", "anon");
         //登出
-        map.put("/logout", "logout");
+        //map.put("/logout", "logout");
+        //map.put("/**", "user");
+        //map形式导入
+        // shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
 
-        map.put("/**", "user");
-
+        //导入权限过滤链数据(String导入的形式)
+        String definitions = filterChainService.loadFilterChainDefinitions();
+        //整个权限过滤链string导入
+        shiroFilterFactoryBean.setFilterChainDefinitions(definitions);
         //配置默认登录url
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
+       // shiroFilterFactoryBean.setLoginUrl("/login.html");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/index.html");
         //错误页面，认证不通过跳转
         shiroFilterFactoryBean.setUnauthorizedUrl("/error.html");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(map); //map形式导入
         return shiroFilterFactoryBean;
     }
 

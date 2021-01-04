@@ -14,22 +14,29 @@
         <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="language" property="language" jdbcType="VARCHAR"/>
-        <!-- one2more -->
+
+        <!-- one2more 梦幻联动SysPermissionDao.selectById 调用的mybatis-plus的接口-->
         <collection property="roles" ofType="com.fromZero.zeroShiro.entity.SysRole">
             <id column="r_id" property="id" jdbcType="INTEGER"/>
             <result column="r_name" property="name" jdbcType="VARCHAR"/>
             <result column="r_create_time" property="createTime" jdbcType="TIMESTAMP"/>
             <collection property="permissions" ofType="com.fromZero.zeroShiro.dao.SysPermissionDao"
-                        select="com.fromZero.zeroShiro.dao.SysRoleDao.selectById" column="r_id">
+                        select="com.fromZero.zeroShiro.dao.SysPermissionDao.selectByRoleId" column="r_id">
             </collection>
         </collection>
     </resultMap>
-    <!--千万不要这么写* 不好走索引 而且需要啥数据 就拿什么最好 我这么写 是因为懒qwq-->
+    <sql id="fields">
+        u.*,
+        r.`id` r_id,
+        r.`name` r_name,
+        r.`create_time` r_create_time
+    </sql>
+    <!--千万不要写* 不好走索引 而且需要啥数据 就拿什么最好 我这么写 是因为懒qwq-->
+    <!-- LEFT JOIN 是因为之前的业务 需要拿user的一些其他信息  之所以没改 是因为懒QAQ-->
     <select id="selectUserPermissionsByEmail" resultMap="userPermissionsResultMap">
         SELECT
-        u.*,g.*,r.*
+        <include refid="fields"/>
         FROM t_sys_user u
-        LEFT JOIN t_sys_group g ON u.group_id = g.id
         LEFT JOIN t_sys_user_role ur ON u.id = ur.uid
         LEFT JOIN t_sys_role r ON r.id = ur.rid
         WHERE u.email = #{email}

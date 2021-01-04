@@ -5,7 +5,7 @@
 <mapper namespace="com.fromZero.zeroShiro.dao.SysPermissionDao">
 
 
-    <select id="selectRoleByPermissionId" resultType="string" >
+    <select id="selectRoleByPermissionId" resultType="string">
      SELECT
      r.name
      FROM
@@ -16,6 +16,11 @@
      p.id=rp.pid
      AND
      p.id=#{id};
+    </select>
+
+
+    <select id="selectByRoleId" resultType="com.fromZero.zeroShiro.entity.SysPermission">
+    SELECT * FROM t_sys_permission p LEFT JOIN t_sys_role_permission rp ON p.id = rp.pid WHERE rp.rid = #{rid}
     </select>
 
 
