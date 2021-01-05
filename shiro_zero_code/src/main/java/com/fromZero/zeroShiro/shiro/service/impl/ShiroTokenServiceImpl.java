@@ -59,7 +59,7 @@ public class ShiroTokenServiceImpl implements ShiroTokenService {
      */
     @Override
     public SysUser login(SysUser user, Boolean rememberMe) {
-        //构造一个登录使用的集中用户数据的tokon
+        //构造一个登录使用的集中用户数据的token
         MyShiroToken shiroToken = new MyShiroToken(user.getEmail(), user.getPassword(),rememberMe,"host","token1","token2");
         shiroToken.setRememberMe(rememberMe);
         //使用token进行登陆

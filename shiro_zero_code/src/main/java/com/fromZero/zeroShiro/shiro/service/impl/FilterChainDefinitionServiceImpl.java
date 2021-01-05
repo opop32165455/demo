@@ -2,7 +2,6 @@ package com.fromZero.zeroShiro.shiro.service.impl;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fromZero.zeroShiro.dao.SysPermissionDao;
 import com.fromZero.zeroShiro.dao.SysRoleDao;
 import com.fromZero.zeroShiro.entity.SysPermission;
@@ -19,7 +18,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * shiro权限链操作
@@ -74,23 +76,23 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
         return chain;
     }
 
-    //生成restful风格功能权限规则
-    private String getRestfulOperationAuthRule() {
-        List<SysPermission> promissions = sysPermissionDao.selectList(new QueryWrapper<>());
-        Set<String> restfulUrls = new HashSet<String>();
-        for (SysPermission promission : promissions) {
-            restfulUrls.add(promission.getUrl());
-        }
-        StringBuffer sb = new StringBuffer("");
-        for (Iterator<String> urls = restfulUrls.iterator(); urls.hasNext(); ) {
-            String url = urls.next();
-            if (!url.startsWith("/")) {
-                url = "/" + url;
-            }
-            sb.append(url).append("=").append("login, rest[").append(url).append("]").append(CRLF);
-        }
-        return sb.toString();
-    }
+    //todo
+    //private String getRestfulOperationAuthRule() {
+    //    List<SysPermission> promissions = sysPermissionDao.selectList(new QueryWrapper<>());
+    //    Set<String> restfulUrls = new HashSet<String>();
+    //    for (SysPermission promission : promissions) {
+    //        restfulUrls.add(promission.getUrl());
+    //    }
+    //    StringBuffer sb = new StringBuffer("");
+    //    for (Iterator<String> urls = restfulUrls.iterator(); urls.hasNext(); ) {
+    //        String url = urls.next();
+    //        if (!url.startsWith("/")) {
+    //            url = "/" + url;
+    //        }
+    //        sb.append(url).append("=").append("login, rest[").append(url).append("]").append(CRLF);
+    //    }
+    //    return sb.toString();
+    //}
 
 
     //根据角色，得到动态权限规则
@@ -132,18 +134,14 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
             //读取文件
             String source = ResourceUtil.readUtf8Str(fileName);
             List<String> info = Arrays.asList(StrUtil.split(source, CRLF));
-            info.stream().filter(String -> !StrUtil.startWith(String, FILTER1)
-                    && !StrUtil.startWith(String, FILTER2)
-                    && StrUtil.isNotBlank(String))
+            info.stream().filter(string -> !StrUtil.startWith(string, FILTER1)
+                    && !StrUtil.startWith(string, FILTER2)
+                    && StrUtil.isNotBlank(string))
                     .map(string -> string + CRLF)
                     .forEach(string -> sb.append(string));
         } catch (Exception e) {
             LOG.error("加载文件出错。file:[{}]", fileName);
         }
-        //返回  /app/list/**=[superManager, MiaoWaZhongZi, HuoQiuShu, YuanQiEr]
-        //     /app/add/**=[superManager, MiaoWaZhongZi]
-        //     /app/update/**=[superManager, HuoQiuShu]
-        //     /app/delete/**=[superManager, YuanQiEr]
         return sb.toString();
     }
 
@@ -157,6 +155,7 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
         Ini ini = new Ini();
         try {
+            assert inputStream != null;
             ini.load(inputStream);
         } catch (Exception e) {
             LOG.error("加载文件出错。file:[{}]", fileName);
@@ -166,8 +165,11 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
         StringBuffer sb = new StringBuffer();
         for (String key : keys) {
             String value = ini.addSection(section).get(key);
-            sb.append(key).append(" = ")
-                    .append(value).append(CRLF);
+            sb.append(key)
+                    .append(" = ")
+                    .append(LOGIN_ROLE_FILTER)
+                    .append(value)
+                    .append(CRLF);
         }
         return sb.toString();
     }

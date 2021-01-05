@@ -25,31 +25,32 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 
 /**
- * @Desciption:
+ * @author R4441
+ * @Desciption: shiro 核心配置类
  * @Auther: ZhangXueCheng4441
- * @Date:2020/12/2/002 21:00
+ * @Date:2020/12/2 21:00
  */
 @Configuration
-public class shiroConfig {
+public class ShiroConfig {
 
     /**
      * Spring自动代理类 将Advisor的bean织入到其他bean（AOP）
      *
-     * @return
+     * @return {@link DefaultAdvisorAutoProxyCreator }
      */
     @Bean
     @ConditionalOnMissingBean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
-        defaultAAP.setProxyTargetClass(true);
-        return defaultAAP;
+        DefaultAdvisorAutoProxyCreator defaultProxy = new DefaultAdvisorAutoProxyCreator();
+        defaultProxy.setProxyTargetClass(true);
+        return defaultProxy;
     }
 
     /**
      * cacheManager 缓存 redis实现
      * 使用的是shiro-redis开源插件
      *
-     * @return
+     * @return {@link RedisCacheManager}
      */
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -61,13 +62,14 @@ public class shiroConfig {
      * 配置shiro redisManager
      * 使用的是shiro-redis开源插件
      *
-     * @return
+     * @return {@link RedisManager}
      */
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost("192.168.59.80");
         redisManager.setPort(6379);
-        redisManager.setExpire(1800);// 配置缓存过期时间
+        // 配置缓存过期时间
+        redisManager.setExpire(1800);
         redisManager.setTimeout(0);
         redisManager.setPassword("anteater@!@!*");
         return redisManager;
@@ -76,10 +78,14 @@ public class shiroConfig {
     /**
      * Session Manager
      * 使用的是shiro-redis开源插件
+     *
+     * @return {@link DefaultWebSessionManager}
      */
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //关闭登陆重定向 url后带jsessionid的问题
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
     }
@@ -95,11 +101,11 @@ public class shiroConfig {
         return redisSessionDAO;
     }
 
-    /**
-     * 限制同一账号登录同时登录人数控制
-     *
-     * @return
-     */
+    ///**
+    // * 限制同一账号登录同时登录人数控制
+    // *
+    // * @return
+    // */
     //@Bean
     //public KickoutSessionControlFilter kickoutSessionControlFilter() {
     //    KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
@@ -112,11 +118,11 @@ public class shiroConfig {
     //}
 
 
-    /**
-     * 设置记住密码cookie
-     *
-     * @return
-     */
+    ///**
+    // * 设置记住密码cookie
+    // *
+    // * @return
+    // */
     //@Bean("rememberMeCookie")
     //public SimpleCookie getRememberMeCookie() {
     //    // session name
@@ -129,12 +135,12 @@ public class shiroConfig {
     //    return simpleCookie;
     //}
 
-    /**
-     * 设置rememberMe cookie
-     *
-     * @param rememberMeCookie bean name
-     * @return
-     */
+    ///**
+    // * 设置rememberMe cookie
+    // *
+    // * @param rememberMeCookie bean name
+    // * @return
+    // */
     //@Bean("rememberMeManager")
     //public CookieRememberMeManager rememberMeManager(@Qualifier("rememberMeCookie") SimpleCookie rememberMeCookie) {
     //    CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
@@ -142,6 +148,7 @@ public class shiroConfig {
     //    cookieRememberMeManager.setCookie(rememberMeCookie);
     //    return cookieRememberMeManager;
     //}
+
 
     /**
      * 配置自定义 权限认证+登陆验证
@@ -157,10 +164,9 @@ public class shiroConfig {
         return myRealm;
     }
 
-
     /**
      * @param myShiroRealm 自定义 权限认证+登陆验证
-     *                     // * @param rememberMeManager 设置关闭浏览器记住面膜
+     *                     // * @param rememberMeManager 设置关闭浏览器记住密码
      *                     // * @param sessionManager    自定义Session 管理器
      * @return 权限管理器
      */
@@ -220,7 +226,7 @@ public class shiroConfig {
         //整个权限过滤链string导入
         shiroFilterFactoryBean.setFilterChainDefinitions(definitions);
         //配置默认登录url
-       // shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/login.html");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/index.html");
         //错误页面，认证不通过跳转

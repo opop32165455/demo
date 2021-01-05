@@ -3,7 +3,7 @@ package com.fromZero.zeroShiro.controller;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.fromZero.zeroShiro.entity.SysUser;
-import com.fromZero.zeroShiro.service.LoginService;
+import com.fromZero.zeroShiro.shiro.service.ShiroTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 /**
  * @author R4441
- * @Desciption:
+ * @Desciption: 登陆接口
  * @Auther: ZhangXueCheng4441
  * @Date:2020/12/2/002 22:00
  */
@@ -28,7 +28,7 @@ import javax.annotation.Resource;
 @RequestMapping
 public class LoginController extends ApiController {
     @Resource
-    private LoginService loginService;
+    private ShiroTokenService tokenService;
 
     /**
      * 登陆
@@ -40,27 +40,37 @@ public class LoginController extends ApiController {
     @GetMapping("/login")
     public String login(SysUser user, @RequestParam(required = false,defaultValue ="true")String rememberMe) {
         if (StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
-            return "请输入用户名和密码！";
+          return "请输入用户名和密码！";
         }
         try {
             //进行验证，这里可以捕获异常，然后返回对应信息
            Boolean isRememberMe ="true".equals(rememberMe);
-            boolean login = loginService.login(user, isRememberMe);
+            tokenService.login(user, isRememberMe);
             // subject.checkRole("admin");
          //   subject.checkPermissions("query", "add");
         } catch (UnknownAccountException e) {
             log.error("用户名不存在！", e);
-            return "用户名不存在！";
+           // return "用户名不存在！";
         } catch (AuthenticationException e) {
             log.error("账号或密码错误！", e);
-            return "账号或密码错误！";
+           // return "账号或密码错误！";
         } catch (AuthorizationException e) {
             log.error("没有权限！", e);
-            return "没有权限";
+          //  return "没有权限";
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "login success";
+        return "login success!";
+    }
+
+    /**
+     * 登出
+     * @return 结果
+     */
+    @GetMapping("/logout")
+    public String login(){
+        tokenService.logout();
+        return "logout success";
     }
 
     /**

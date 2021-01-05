@@ -20,7 +20,8 @@ import java.util.Date;
 public class CommonFieldHandler implements MetaObjectHandler {
     /**
      * 自动填充创建时间 更新时间
-     * @param metaObject
+     *
+     * @param metaObject 默认参数
      */
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -29,9 +30,11 @@ public class CommonFieldHandler implements MetaObjectHandler {
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("lastUpdateTime", new Date(), metaObject);
     }
+
     /**
      * 自动填充 更新时间
-     * @param metaObject
+     *
+     * @param metaObject 默认参数
      */
     @Override
     public void updateFill(MetaObject metaObject) {

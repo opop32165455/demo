@@ -1,9 +1,6 @@
 package com.fromZero.zeroShiro.shiro.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 import java.io.Serializable;
@@ -12,18 +9,20 @@ import java.io.Serializable;
  *
  * 自定义 封装的shiro框架使用的token
  *
- * * 父类属性
- * * @param private String username;
- * * @param private char[] password;
- * * @param  private boolean rememberMe;
- * * @param  private String host;
- * @author lin
- * @since 2017/4/7.
+ *    父类属性
+ *  **@param private String username;
+ *  **@param private char[] password;
+ *  **@param  private boolean rememberMe;
+ *  **@param  private String host;
+ *
+ * @author zxc
+ * @since 2020/12/7.
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class MyShiroToken extends UsernamePasswordToken implements Serializable {
 
     private static final long serialVersionUID = -7767370043611561238L;

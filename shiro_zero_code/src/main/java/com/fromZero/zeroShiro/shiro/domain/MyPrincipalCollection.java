@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
 /**
+ * 未完成
+ *
  * @author zhangxuecheng4441
  * @date 2021/1/4/004 20:02
  */

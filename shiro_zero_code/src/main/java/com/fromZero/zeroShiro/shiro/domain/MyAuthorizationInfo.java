@@ -10,6 +10,9 @@ import org.apache.shiro.authz.Permission;
 import java.util.Set;
 
 /**
+ * 自定义权限认证类
+ * 可根据需求添加任意参数
+ *
  * @author zhangxuecheng4441
  * @date 2020/12/29/029 20:58
  */

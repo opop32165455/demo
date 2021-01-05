@@ -77,26 +77,25 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        //接受到shiro管理的用户tokon
+        //接受到shiro管理的用户token （配置redis 解决类型转换异常问题）
         MyShiroToken loginToken = (MyShiroToken) authenticationToken;
-        //UsernamePasswordToken loginToken = (UsernamePasswordToken) authenticationToken;
-        //DatawShiroToken loginToken = null;
         if (StringUtils.isEmpty(authenticationToken.getPrincipal())) {
             return null;
         }
         //获取用户信息
         // String password = loginToken.getStringPassword();
         Object principal = authenticationToken.getPrincipal();
-        LambdaQueryWrapper<SysUser> lambdaWrapper = new QueryWrapper<SysUser>().lambda();
-        lambdaWrapper.eq(SysUser::getEmail, loginToken.getUsername());
+        LambdaQueryWrapper<SysUser> lambdaWrapper = new QueryWrapper<SysUser>()
+                .lambda()
+                .eq(SysUser::getEmail, loginToken.getUsername());
         SysUser dateBaseUserInfo = sysUserService.getOne(lambdaWrapper);
         if (dateBaseUserInfo == null) {
             //这里返回后会报出对应异常
             return null;
         } else {
-            //这里验证authenticationToken和simpleAuthenticationInfo的信息
-            MyAuthenticationInfo myAuthenticationInfo = new MyAuthenticationInfo(dateBaseUserInfo, "password", getName());
-            return myAuthenticationInfo;
+            //这里验证弹去match 校验密码 这里把该用户真实密码封装到info
+            //想怎么封装怎么封装 看业务需要
+            return new MyAuthenticationInfo(dateBaseUserInfo, "password", getName());
         }
     }
 }

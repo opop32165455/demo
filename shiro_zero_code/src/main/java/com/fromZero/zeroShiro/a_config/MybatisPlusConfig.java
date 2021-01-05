@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MybatisPlusConfig {
     /**
      * 性能分析拦截器，不建议生产使用
-     * 显示sql执行时间 显示执行的sql语句
+     * 显示sql执行时间 显示执行的sql语句（非常好用 强烈推荐）
      */
     @Bean
     public PerformanceInterceptor performanceInterceptor() {
