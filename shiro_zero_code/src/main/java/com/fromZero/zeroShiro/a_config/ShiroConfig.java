@@ -3,7 +3,7 @@ package com.fromZero.zeroShiro.a_config;
 
 import com.fromZero.zeroShiro.shiro.filter.LoginFilter;
 import com.fromZero.zeroShiro.shiro.filter.RoleFilter;
-import com.fromZero.zeroShiro.shiro.matcher.MyPasswordMatcher;
+import com.fromZero.zeroShiro.shiro.matcher.MyMd5WithSaltPasswordMatcher;
 import com.fromZero.zeroShiro.shiro.realm.MyRealm;
 import com.fromZero.zeroShiro.shiro.service.FilterChainDefinitionService;
 import org.apache.shiro.mgt.SecurityManager;
@@ -160,7 +160,7 @@ public class ShiroConfig {
         //自定义的登陆和鉴权方式
         MyRealm myRealm = new MyRealm();
         //加入自己的密码验证方式
-        myRealm.setCredentialsMatcher(new MyPasswordMatcher());
+        myRealm.setCredentialsMatcher(new MyMd5WithSaltPasswordMatcher());
         return myRealm;
     }
 

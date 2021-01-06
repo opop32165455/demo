@@ -12,6 +12,7 @@ import com.fromZero.zeroShiro.entity.SysRole;
 import com.fromZero.zeroShiro.entity.SysUser;
 import com.fromZero.zeroShiro.shiro.service.FilterChainDefinitionService;
 import org.apache.shiro.config.Ini;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -138,5 +139,11 @@ public class ZeroBeginningApplicationTests {
 
     }
 
-
+    @Test
+    public void MD5_match() {
+        //md5 加盐  散列次数
+        Md5Hash md5Hash = new Md5Hash("abc","salt",9981);
+        String password = md5Hash.toHex();
+        System.out.println("password = " + password);
+    }
 }
