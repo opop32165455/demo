@@ -3,14 +3,14 @@
 /js/**=anon
 /css/**=anon
 /open/**=anon
+/beforeLogin/**=anon
 
 #在shiroConfig导入
 #可以写入#号注释
 #注意anon不要写成anno 会出问题
 
-/#/login=anon
 /logout=logout
-/login=anon
+/login=authc
 
 //需要添加放行url 写在此行以上
 #anon 可以匿名访问

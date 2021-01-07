@@ -45,7 +45,7 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
     /**
      * 其余角色权限分配
      */
-    private static final String LAST_AUTH_CHAIN = "/** = user";
+    private static final String LAST_AUTH_CHAIN = "/** = authc";
 
     @Resource
     @Lazy
@@ -68,7 +68,7 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
         //默认配置权限
         sb.append(filterChainFromTxt())
                 //数据库配置权限
-                .append(getDbAuthRule())
+                //.append(getDbAuthRule())
                 //配置其余权限
                 .append(LAST_AUTH_CHAIN);
         String chain = sb.toString();

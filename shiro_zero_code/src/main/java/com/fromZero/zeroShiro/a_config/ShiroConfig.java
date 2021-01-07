@@ -61,6 +61,11 @@ public class ShiroConfig {
      */
     @Value("${spring.redis.timeout}")
     private Integer timeout;
+    /**
+     * redis 数据库id
+     */
+    @Value("${spring.redis.database}")
+    private Integer database;
 
 
     /**
@@ -72,11 +77,12 @@ public class ShiroConfig {
     @Bean("redisManager")
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
-        redisManager.setHost(host);
-        redisManager.setPort(port);
+        redisManager.setHost(host + ":" + port);
+        //redisManager.setPort(port);
         // 配置缓存过期时间
-        redisManager.setExpire(1800);
+        //redisManager.setExpire(1800);
         redisManager.setTimeout(timeout);
+        redisManager.setDatabase(database);
         redisManager.setPassword(password);
         return redisManager;
     }
@@ -104,7 +110,7 @@ public class ShiroConfig {
     public RedisCacheManager cacheManager(@Qualifier("redisManager") RedisManager redisManager) {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager);
-        redisCacheManager.setKeyPrefix("shiro_redis_cached");
+        redisCacheManager.setKeyPrefix("shiro:cached:");
         return redisCacheManager;
     }
 
@@ -276,18 +282,19 @@ public class ShiroConfig {
     public MyRealm myShiroRealm(@Qualifier("myMd5WithSaltPasswordMatcher") MyMd5WithSaltPasswordMatcher myMd5Matcher) {
         //自定义的登陆和鉴权方式
         MyRealm myRealm = new MyRealm();
-        //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
-        myRealm.setCachingEnabled(true);
         //加入自己的密码验证方式
         myRealm.setCredentialsMatcher(myMd5Matcher);
+        //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
+        myRealm.setAuthenticationCachingEnabled(true);
         //启用授权缓存，即缓存AuthorizationInfo信息，默认false
         myRealm.setAuthorizationCachingEnabled(true);
         //缓存AuthenticationInfo信息的缓存名称
-        myRealm.setAuthenticationCacheName("shiro.authentication");
+        myRealm.setAuthenticationCacheName("authenticationInfo");
         //缓存AuthorizationInfo信息的缓存名称
-        myRealm.setAuthorizationCacheName("shiro.authorization");
+        myRealm.setAuthorizationCacheName("authorizationInfo");
         return myRealm;
     }
+
     /**
      * @param myShiroRealm 自定义 权限认证+登陆验证
      *                     // * @param rememberMeManager 设置关闭浏览器记住密码
@@ -332,7 +339,6 @@ public class ShiroConfig {
         //设置权限管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-
         //导入权限过滤链数据(使用map的形式配置)
         //主要必须为LinkedHashMap 权限是有顺序之分的
         //Map<String, String> map = new LinkedHashMap<>();
@@ -353,11 +359,11 @@ public class ShiroConfig {
         //整个权限过滤链string导入
         shiroFilterFactoryBean.setFilterChainDefinitions(definitions);
         //配置默认登录url
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/login");
         //首页
-        shiroFilterFactoryBean.setSuccessUrl("/index.html");
+        shiroFilterFactoryBean.setSuccessUrl("/afterLogin/index.html");
         //错误页面，认证不通过跳转
-        shiroFilterFactoryBean.setUnauthorizedUrl("/error.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/beforeLogin/error.html");
         return shiroFilterFactoryBean;
     }
 
