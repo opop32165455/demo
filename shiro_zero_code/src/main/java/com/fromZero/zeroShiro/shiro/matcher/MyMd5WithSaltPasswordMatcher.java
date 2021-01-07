@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author zxc
- * @Desciption: 密码校验类  （需要配置交给shiro）
+ * @Desciption: 密码校验类  （需要在shiro config配置交给shiro）
  * @Auther: ZhangXueCheng4441
  * @Date: 2020/1/6/20:44
  */
-@Component
+@Component("myMd5WithSaltPasswordMatcher")
 public class MyMd5WithSaltPasswordMatcher implements CredentialsMatcher {
     /**
      * 重写shiro密码校验

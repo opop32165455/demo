@@ -1,6 +1,5 @@
 package com.fromZero.zeroShiro.a_config;
 
-
 import com.fromZero.zeroShiro.shiro.filter.LoginFilter;
 import com.fromZero.zeroShiro.shiro.filter.RoleFilter;
 import com.fromZero.zeroShiro.shiro.matcher.MyMd5WithSaltPasswordMatcher;
@@ -12,6 +11,7 @@ import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.SessionListenerAdapter;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -25,19 +25,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
 
 /**
- * @author R4441
- * @Desciption: shiro 核心配置类
- * @Auther: ZhangXueCheng4441
- * @Date:2020/12/2 21:00
+ * @author zhangxuecheng4441
+ * @date 2021/1/7/007 11:21
  */
-@Configuration
-public class ShiroConfig {
+public class shirotest {
+
     /**
      * redis地址
      */
@@ -61,25 +58,6 @@ public class ShiroConfig {
      */
     @Value("${spring.redis.timeout}")
     private Integer timeout;
-
-
-    /**
-     * 配置shiro redisManager
-     * 使用的是shiro-redis开源插件
-     *
-     * @return {@link RedisManager}
-     */
-    @Bean("redisManager")
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        redisManager.setHost(host);
-        redisManager.setPort(port);
-        // 配置缓存过期时间
-        redisManager.setExpire(1800);
-        redisManager.setTimeout(timeout);
-        redisManager.setPassword(password);
-        return redisManager;
-    }
 
     /**
      * Spring自动代理类 将Advisor的bean织入到其他bean（AOP）
@@ -141,7 +119,7 @@ public class ShiroConfig {
     // * @return
     // */
     //@Bean
-    //public KickoutSessionControlFilter kickoutSessionControlFilter() {
+    //public KickoutSessionControlFilter  kickoutSessionControlFilter() {
     //    KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
     //    kickoutSessionControlFilter.setCacheManager(cacheManager());
     //    kickoutSessionControlFilter.setSessionManager(sessionManager());
@@ -150,7 +128,7 @@ public class ShiroConfig {
     //    kickoutSessionControlFilter.setKickoutUrl("/auth/kickout");
     //    return kickoutSessionControlFilter;
     //}
-
+    //
 
     /**
      * 设置记住密码cookie
@@ -188,18 +166,18 @@ public class ShiroConfig {
         return cookieRememberMeManager;
     }
 
-    ///**
-    // * FormAuthenticationFilter 过滤器 过滤记住我
-    // *
-    // * @return 表单过滤器 todo 有点问题 会让静态页面访问不到
-    // */
-    //@Bean
-    //public FormAuthenticationFilter formAuthenticationFilter() {
-    //    FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
-    //    //对应前端的checkbox的name = rememberMe
-    //    formAuthenticationFilter.setRememberMeParam("rememberMe");
-    //    return formAuthenticationFilter;
-    //}
+    /**
+     * FormAuthenticationFilter 过滤器 过滤记住我
+     *
+     * @return 表单过滤器
+     */
+    @Bean
+    public FormAuthenticationFilter formAuthenticationFilter() {
+        FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
+        //对应前端的checkbox的name = rememberMe
+        formAuthenticationFilter.setRememberMeParam("rememberMe");
+        return formAuthenticationFilter;
+    }
 
     /**
      * 配置session监听
@@ -277,17 +255,18 @@ public class ShiroConfig {
         //自定义的登陆和鉴权方式
         MyRealm myRealm = new MyRealm();
         //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
-        myRealm.setCachingEnabled(true);
+        //myRealm.setCachingEnabled(true);
         //加入自己的密码验证方式
         myRealm.setCredentialsMatcher(myMd5Matcher);
         //启用授权缓存，即缓存AuthorizationInfo信息，默认false
-        myRealm.setAuthorizationCachingEnabled(true);
+        //myRealm.setAuthorizationCachingEnabled(true);
         //缓存AuthenticationInfo信息的缓存名称
         myRealm.setAuthenticationCacheName("shiro.authentication");
         //缓存AuthorizationInfo信息的缓存名称
         myRealm.setAuthorizationCacheName("shiro.authorization");
         return myRealm;
     }
+
     /**
      * @param myShiroRealm 自定义 权限认证+登陆验证
      *                     // * @param rememberMeManager 设置关闭浏览器记住密码
@@ -356,7 +335,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/index.html");
-        //错误页面，认证不通过跳转
+        //错误页面，没有权限转跳
         shiroFilterFactoryBean.setUnauthorizedUrl("/error.html");
         return shiroFilterFactoryBean;
     }

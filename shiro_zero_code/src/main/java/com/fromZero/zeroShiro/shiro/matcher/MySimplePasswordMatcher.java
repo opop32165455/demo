@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author zxc
- * @Desciption: 密码校验类  （需要配置交给shiro）
+ * @Desciption: 密码校验类  （需要 shiro config 配置交给shiro）
  * @Auther: ZhangXueCheng4441
  * @Date: 2020/12/4/20:44
  */

@@ -145,5 +145,17 @@ public class ZeroBeginningApplicationTests {
         Md5Hash md5Hash = new Md5Hash("abc","salt",9981);
         String password = md5Hash.toHex();
         System.out.println("password = " + password);
+        //md5 加盐  散列次数
+        Md5Hash md5Hash2 = new Md5Hash("yuanqie","salt",9981);
+        String password2 = md5Hash2.toHex();
+        System.out.println("password = " + password2);
+        //md5 加盐  散列次数
+        Md5Hash md5Hash3 = new Md5Hash("miaowazhongzi","salt",9981);
+        String password3 = md5Hash3.toHex();
+        System.out.println("password = " + password3);
+        //md5 加盐  散列次数
+        Md5Hash md5Hash4 = new Md5Hash("huoqiushu","salt",9981);
+        String password4 = md5Hash4.toHex();
+        System.out.println("password = " + password4);
     }
 }

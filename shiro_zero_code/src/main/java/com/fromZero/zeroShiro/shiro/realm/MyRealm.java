@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author zxc
- * @Desciption: shiro核心登录鉴权类
+ * @Desciption: shiro核心登录鉴权类(与数据交互层）
  * @Auther: ZhangXueCheng4441
  * @Date:2020/12/2/002 20:48
  */
