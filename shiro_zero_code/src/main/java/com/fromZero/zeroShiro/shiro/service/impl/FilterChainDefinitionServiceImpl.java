@@ -68,7 +68,7 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
         //默认配置权限
         sb.append(filterChainFromTxt())
                 //数据库配置权限
-                //.append(getDbAuthRule())
+                .append(getDbAuthRule())
                 //配置其余权限
                 .append(LAST_AUTH_CHAIN);
         String chain = sb.toString();

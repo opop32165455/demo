@@ -29,30 +29,30 @@ public class LoginAop {
 
     @Around("controller()")
     public Object shiroTryCatch(ProceedingJoinPoint joinPoint) {
-        Object result = "login success !";
+        Object result = "afterLogin/index.html";
         try {
             result = joinPoint.proceed();
         } catch (UnknownAccountException e) {
             LOG.error("用户名不存在！", e);
-            result = "用户名不存在！";
+            result = "beforeLogin/error.html";
         } catch (IncorrectCredentialsException e) {
             LOG.error("认证错误！", e);
-            result = "认证错误！";
+            result = "beforeLogin/error.html";
         } catch (LockedAccountException e) {
             LOG.error("账户锁定！", e);
-            result = "账户锁定！";
+            result = "beforeLogin/error.html";
         } catch (UnauthorizedException e) {
             LOG.error("没有权限访问该地址！", e);
-            result = "没有权限访问该地址！";
-        }catch (AuthenticationException e){
+            result = "beforeLogin/error.html";
+        } catch (AuthenticationException e) {
             LOG.error("身份验证错误！", e);
-            result = "身份验证错误！";
-        }catch (AuthorizationException e) {
+            result = "beforeLogin/error.html";
+        } catch (AuthorizationException e) {
             LOG.error("没有权限！", e);
-            result = "没有权限";
+            result = "beforeLogin/error.html";
         } catch (Exception e) {
             e.printStackTrace();
-            result = "未知错误";
+            result = "beforeLogin/error.html";
         } finally {
             return result;
         }

@@ -9,8 +9,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.SavedRequest;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,13 +65,13 @@ public class LoginController extends ApiController {
         //subject.isPermitted("light_saber:test1");
 
         //subject.isPermitted("good_saber:drive:eagle5");
-        SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+        //SavedRequest savedRequest = WebUtils.getSavedRequest(request);
         // 登录前url
-        savedRequest.getRequestUrl();
+        //savedRequest.getRequestUrl();
         // 取得url之后对SavedRequest进行清空
         // 如果未使用接口方式，可以直接跳转url并清空，使用WebUtils中的redirectToSavedRequest方法
         //WebUtils.getAndClearSavedRequest(request);
-        return "login success!";
+        return "afterLogin/index.html";
 
     }
 
