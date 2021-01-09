@@ -6,8 +6,6 @@ import com.fromZero.zeroShiro.entity.SysUser;
 import com.fromZero.zeroShiro.shiro.service.ShiroTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,41 +84,5 @@ public class LoginController extends ApiController {
         return "logout success";
     }
 
-    /**
-     * 权限注解校验 url比较少的情况可以使用
-     *
-     * @return
-     */
-    @RequiresRoles("admin")
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin success!";
-    }
 
-    /**
-     * 权限注解校验 url比较少的情况可以使用
-     *
-     * @return
-     */
-    @RequiresPermissions("query")
-    @GetMapping("/query")
-    public String query() {
-        return "query success!";
-    }
-
-    /**
-     * 权限注解校验 url比较少的情况可以使用
-     *
-     * @return
-     */
-    @RequiresPermissions("add")
-    @GetMapping("/add")
-    public String add() {
-        return "add success!";
-    }
-
-    @GetMapping("/index")
-    public String index() {
-        return "index success!";
-    }
 }

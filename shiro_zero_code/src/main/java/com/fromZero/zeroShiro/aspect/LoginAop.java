@@ -37,6 +37,7 @@ public class LoginAop {
             result = "beforeLogin/error.html";
         } catch (IncorrectCredentialsException e) {
             LOG.error("认证错误！", e);
+            //new RolesAuthorizationFilter()
             result = "beforeLogin/error.html";
         } catch (LockedAccountException e) {
             LOG.error("账户锁定！", e);

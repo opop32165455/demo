@@ -45,7 +45,7 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
     /**
      * 其余角色权限分配
      */
-    private static final String LAST_AUTH_CHAIN = "/** = authc";
+    private static final String LAST_AUTH_CHAIN = "/** = user";
 
     @Resource
     @Lazy
@@ -134,11 +134,14 @@ public class FilterChainDefinitionServiceImpl implements FilterChainDefinitionSe
             //读取文件
             String source = ResourceUtil.readUtf8Str(fileName);
             List<String> info = Arrays.asList(StrUtil.split(source, CRLF));
-            info.stream().filter(string -> !StrUtil.startWith(string, FILTER1)
-                    && !StrUtil.startWith(string, FILTER2)
-                    && StrUtil.isNotBlank(string))
+            info.stream()
+                    //过滤掉“//”，“#”，还有空行的影响
+                    .filter(string -> !StrUtil.startWith(string, FILTER1)
+                            && !StrUtil.startWith(string, FILTER2)
+                            && StrUtil.isNotBlank(string))
+                    //每条数据后面加个回车
                     .map(string -> string + CRLF)
-                    .forEach(string -> sb.append(string));
+                    .forEach(sb::append);
         } catch (Exception e) {
             LOG.error("加载文件出错。file:[{}]", fileName);
         }

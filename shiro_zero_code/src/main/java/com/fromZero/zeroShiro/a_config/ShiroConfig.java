@@ -12,7 +12,6 @@ import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.SessionListenerAdapter;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
@@ -317,12 +316,13 @@ public class ShiroConfig {
         return securityManager;
     }
 
+
     /**
      * 权限过滤器配置
      *
-     * @param securityManager bean name
-     *                        //* @param authService     bean name
-     * @return 权限配置注册到工厂
+     * @param securityManager    安全管理器（核心）
+     * @param filterChainService 自定义的权限过滤功能
+     * @return shiro过滤器工厂
      */
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") SecurityManager securityManager,
@@ -333,25 +333,23 @@ public class ShiroConfig {
         filterHashMap.put("login", new LoginFilter());
         //自定义的role filter
         filterHashMap.put("role", new RoleFilter());
-        //添加带有rememberMe功能的filter
-        filterHashMap.put("userFilter", new UserFilter());
         shiroFilterFactoryBean.setFilters(filterHashMap);
         //设置权限管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-        //导入权限过滤链数据(使用map的形式配置)
-        //主要必须为LinkedHashMap 权限是有顺序之分的
+        ////导入权限过滤链数据(使用map的形式配置)
+        ////主要必须为LinkedHashMap 权限是有顺序之分的
         //Map<String, String> map = new LinkedHashMap<>();
         //map.put("/js/**", "anon");
         //map.put("/css/**", "anon");
         //map.put("/open/**", "anon");
         //map.put("/static/**", "anon");
         //map.put("/login", "anon");
-        //登出
+        ////登出
         //map.put("/logout", "logout");
         //map.put("/**", "user");
-        //map形式导入
-        // shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+        ////map形式导入
+        //shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
 
         //导入权限过滤链数据(String导入的形式)

@@ -2,12 +2,11 @@ package com.fromZero.zeroShiro.shiro.filter;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- *  role和permission校验是重复的 选择一个就行 最合适的是role
+ *  role和permission校验是有点冗余的  role就满足我了
  *  权限数据以及在导入角色设置过了
  *
  * @author R4441
