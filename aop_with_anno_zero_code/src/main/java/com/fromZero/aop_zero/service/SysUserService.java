@@ -1,7 +1,7 @@
-package com.fromZero.zeroKafka.service;
+package com.fromZero.aop_zero.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.fromZero.zeroKafka.entity.SysUser;
+import com.fromZero.aop_zero.entity.SysUser;
 
 /**
  * (SysUser)表服务接口

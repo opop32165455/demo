@@ -1,7 +1,8 @@
-package com.fromZero.zeroKafka.dao;
+package com.fromZero.aop_zero.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.fromZero.zeroKafka.entity.SysUser;
+import com.fromZero.aop_zero.entity.SysUser;
+
 
 /**
  * (SysUser)表数据库访问层

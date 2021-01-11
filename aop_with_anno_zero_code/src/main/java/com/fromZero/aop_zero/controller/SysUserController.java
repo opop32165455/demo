@@ -1,12 +1,13 @@
-package com.fromZero.zeroKafka.controller;
+package com.fromZero.aop_zero.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fromZero.zeroKafka.entity.SysUser;
-import com.fromZero.zeroKafka.service.SysUserService;
+import com.fromZero.aop_zero.annotation.ControllerTryCatch;
+import com.fromZero.aop_zero.entity.SysUser;
+import com.fromZero.aop_zero.service.SysUserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ public class SysUserController extends ApiController {
      * @param sysUser 查询实体
      * @return 所有数据
      */
-    @GetMapping
+    @GetMapping("/list")
     public R selectAll(Page<SysUser> page, SysUser sysUser) {
         return success(this.sysUserService.page(page, new QueryWrapper<>(sysUser)));
     }
@@ -47,6 +48,7 @@ public class SysUserController extends ApiController {
      * @return 单条数据
      */
     @GetMapping("{id}")
+    @ControllerTryCatch(ControllerMethodName = "i write selectAll")
     public R selectOne(@PathVariable Serializable id) {
         return success(this.sysUserService.getById(id));
     }
@@ -57,7 +59,8 @@ public class SysUserController extends ApiController {
      * @param sysUser 实体对象
      * @return 新增结果
      */
-    @PostMapping
+    @PostMapping("/add")
+    @ControllerTryCatch(ControllerMethodName = "i write selectAll")
     public R insert(@RequestBody SysUser sysUser) {
         return success(this.sysUserService.save(sysUser));
     }

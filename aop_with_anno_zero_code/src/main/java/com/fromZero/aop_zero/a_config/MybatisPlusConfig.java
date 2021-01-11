@@ -1,4 +1,4 @@
-package com.fromZero.zeroKafka.a_config;
+package com.fromZero.aop_zero.a_config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
