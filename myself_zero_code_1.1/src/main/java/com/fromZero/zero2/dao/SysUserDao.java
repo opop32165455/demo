@@ -1,7 +1,7 @@
-package com.fromZero.neo4jZero.dao;
+package com.fromZero.zero2.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.fromZero.neo4jZero.entity.SysUser;
+import com.fromZero.zero2.entity.SysUser;
 
 /**
  * (SysUser)表数据库访问层
