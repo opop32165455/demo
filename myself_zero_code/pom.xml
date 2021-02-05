@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <version>2.0.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fromZero</groupId>
-    <artifactId>myself_zero_code</artifactId>
+    <artifactId>myself_zero_code1.1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>myself_zero_code</name>
+    <name>myself_zero_code1.1</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -43,7 +43,13 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.0.6</version>
+            <version>3.4.2</version>
+        </dependency>
+        <!-- sql 性能检测插件 -->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>3.9.1</version>
         </dependency>
         <!-- 引入阿里数据库连接池 -->
         <dependency>

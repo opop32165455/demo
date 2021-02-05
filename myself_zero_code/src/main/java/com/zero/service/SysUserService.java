@@ -1,7 +1,7 @@
-package com.fromZero.zero.service;
+package com.zero.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.fromZero.zero.entity.SysUser;
+import com.zero.entity.SysUser;
 
 /**
  * (SysUser)表服务接口

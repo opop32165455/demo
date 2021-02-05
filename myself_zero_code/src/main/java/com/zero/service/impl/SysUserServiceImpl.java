@@ -1,9 +1,9 @@
-package com.fromZero.zero.service.impl;
+package com.zero.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fromZero.zero.dao.SysUserDao;
-import com.fromZero.zero.entity.SysUser;
-import com.fromZero.zero.service.SysUserService;
+import com.zero.dao.SysUserDao;
+import com.zero.entity.SysUser;
+import com.zero.service.SysUserService;
 import org.springframework.stereotype.Service;
 
 /**

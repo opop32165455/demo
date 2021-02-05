@@ -1,4 +1,4 @@
-package com.fromZero.neo4jZero.entity;
+package com.zero.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
