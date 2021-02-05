@@ -1,7 +1,7 @@
-package com.fromZero.neo4jZero.service;
+package com.function.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.fromZero.neo4jZero.entity.SysUser;
+import com.function.entity.SysUser;
 
 /**
  * (SysUser)表服务接口

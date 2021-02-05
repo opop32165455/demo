@@ -1,9 +1,9 @@
-package com.fromZero.neo4jZero.service.impl;
+package com.function.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fromZero.neo4jZero.dao.SysUserDao;
-import com.fromZero.neo4jZero.entity.SysUser;
-import com.fromZero.neo4jZero.service.SysUserService;
+import com.function.dao.SysUserDao;
+import com.function.entity.SysUser;
+import com.function.service.SysUserService;
 import org.springframework.stereotype.Service;
 
 /**

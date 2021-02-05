@@ -1,12 +1,13 @@
-package com.fromZero.neo4jZero.controller;
+package com.function.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fromZero.neo4jZero.entity.SysUser;
-import com.fromZero.neo4jZero.service.SysUserService;
+import com.function.entity.SysUser;
+import com.function.service.SysUserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,9 +20,11 @@ import java.util.List;
  * @author makejava
  * @since 2020-12-12 14:28:36
  */
-@RestController
+@Controller
 @RequestMapping("sysUser")
 public class SysUserController extends ApiController {
+
+
     /**
      * 服务对象
      */
