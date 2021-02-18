@@ -1,5 +1,5 @@
 # Getting Started
-
+函数式编程代码
 ### Reference Documentation
 For further reference, please consider the following sections:
 
