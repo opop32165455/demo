@@ -18,12 +18,12 @@ public class ThreadPools {
      * 处理多线程任务（速度快 消耗大）
      * 但是如果任务繁重 相当消耗系统线程资源
      */
-    ExecutorService simpleThreadPool;
+    private static volatile ExecutorService simpleThreadPool;
     /**
      * 处理繁琐的单线程任务（速度慢 消耗小）
      * 不那么浪费线程资源
      */
-    ExecutorService singleThreadPool;
+    private static volatile ExecutorService singleThreadPool;
 
     public ExecutorService getSimpleThreadPool() {
         if (simpleThreadPool == null) {
@@ -40,7 +40,7 @@ public class ThreadPools {
         if (singleThreadPool == null) {
             synchronized (ThreadPools.class) {
                 if (singleThreadPool == null) {
-                    singleThreadPool =  ThreadUtil.newExecutor(1, 1);
+                    singleThreadPool = ThreadUtil.newExecutor(1, 1);
                 }
             }
         }
