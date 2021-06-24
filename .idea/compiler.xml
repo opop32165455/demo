@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zero-beginning" />
+        <module name="Kafka_zero_code" />
+        <module name="myself_zero_code1.1" />
+        <module name="design_mode_code" />
+        <module name="JsonSchema_code" />
+        <module name="Function_code" />
+        <module name="shiro_zero_code" />
+        <module name="neo4j_zero_code" />
+        <module name="aop_zero_code" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aop_zero_code" target="1.8" />
+      <module name="design_mode_code" target="1.8" />
+      <module name="Function_code" target="1.8" />
+      <module name="JsonSchema_code" target="1.8" />
+      <module name="Kafka_zero_code" target="1.8" />
+      <module name="myself_zero_code1.1" target="1.8" />
+      <module name="neo4j_zero_code" target="1.8" />
+      <module name="shiro_zero_code" target="1.8" />
+      <module name="Threads_code" target="1.8" />
+      <module name="zero-beginning" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Function_code" options="-parameters" />
+      <module name="JsonSchema_code" options="-parameters" />
+      <module name="Kafka_zero_code" options="-parameters" />
+      <module name="aop_zero_code" options="-parameters" />
+      <module name="design_mode_code" options="-parameters" />
+      <module name="myself_zero_code1.1" options="-parameters" />
+      <module name="neo4j_zero_code" options="-parameters" />
+      <module name="shiro_zero_code" options="-parameters" />
+      <module name="zero-beginning" options="-parameters" />
+    </option>
+  </component>
+</project>

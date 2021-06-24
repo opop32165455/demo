@@ -18,16 +18,27 @@ target/
 *.iws
 *.iml
 *.ipr
+*.log
+*.0.gz
+*.mvn
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
+
 /nbdist/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+logs/*
 
 ### VS Code ###
 .vscode/
+
+package/*
+
+apoc_graph*
+
+logs/
+/app-web-server/target/

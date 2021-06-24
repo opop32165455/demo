@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Kafka_code/pom.xml" />
+        <option value="$PROJECT_DIR$/neo4j_code/pom.xml" />
+        <option value="$PROJECT_DIR$/shiro_code/pom.xml" />
+        <option value="$PROJECT_DIR$/Function_code/pom.xml" />
+        <option value="$PROJECT_DIR$/JsonSchema_code/pom.xml" />
+        <option value="$PROJECT_DIR$/Design_mode_code/pom.xml" />
+        <option value="$PROJECT_DIR$/myself_zero_code/pom.xml" />
+        <option value="$PROJECT_DIR$/shiro_code -bug版本/pom.xml" />
+        <option value="$PROJECT_DIR$/Aop_with_anno_code/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>
