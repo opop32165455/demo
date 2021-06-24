@@ -49,6 +49,7 @@ public class Strategy3_demo implements Strategy3Handler {
      *  todo  @postconstruct 用初始化bean执行的注解 也可以实现
      * @throws Exception
      */
+    @Override
     @Autowired
     @PostConstruct
     public void afterPropertiesSet() throws Exception {

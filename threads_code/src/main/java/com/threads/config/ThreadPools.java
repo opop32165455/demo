@@ -25,7 +25,7 @@ public class ThreadPools {
      */
     private static volatile ExecutorService singleThreadPool;
 
-    public ExecutorService getSimpleThreadPool() {
+    public static ExecutorService getSimpleThreadPool() {
         if (simpleThreadPool == null) {
             synchronized (ThreadPools.class) {
                 if (simpleThreadPool == null) {
@@ -36,7 +36,7 @@ public class ThreadPools {
         return simpleThreadPool;
     }
 
-    public ExecutorService getSingleThreadPool() {
+    public static ExecutorService getSingleThreadPool() {
         if (singleThreadPool == null) {
             synchronized (ThreadPools.class) {
                 if (singleThreadPool == null) {
