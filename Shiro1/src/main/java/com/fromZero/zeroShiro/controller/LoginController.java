@@ -52,17 +52,17 @@ public class LoginController extends ApiController {
         SysUser login = tokenService.login(user, isRememberMe);
         Subject subject = SecurityUtils.getSubject();
         //校验是否有是该角色
-        //subject.checkRole("simple_guy");
+        //jdkObservable.checkRole("simple_guy");
 
-        //subject.hasRole("superManager");
+        //jdkObservable.hasRole("superManager");
 
 
         //校验是否有该权限
-        //subject.checkPermissions("browse", "insert");
+        //jdkObservable.checkPermissions("browse", "insert");
 
-        //subject.isPermitted("light_saber:test1");
+        //jdkObservable.isPermitted("light_saber:test1");
 
-        //subject.isPermitted("good_saber:drive:eagle5");
+        //jdkObservable.isPermitted("good_saber:drive:eagle5");
         //SavedRequest savedRequest = WebUtils.getSavedRequest(request);
         // 登录前url
         //savedRequest.getRequestUrl();

@@ -26,13 +26,13 @@ public class AddPrincipalToSessionFilter extends OncePerRequestFilter {
     protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
 
         ////查询当前用户的信息
-        //Subject subject = SecurityUtils.getSubject();
+        //Subject jdkObservable = SecurityUtils.getSubject();
         ////判断用户是不是通过自动登录进来的
-        //if (subject.isRemembered()) {
+        //if (jdkObservable.isRemembered()) {
         //    SysUser sysUser = null;
         //    //如果是，则获取它的用户信息
-        //    if (subject != null && subject.getPrincipal() != null && subject.getPrincipal() instanceof SysUser) {
-        //        sysUser = (SysUser) subject.getPrincipal();
+        //    if (jdkObservable != null && jdkObservable.getPrincipal() != null && jdkObservable.getPrincipal() instanceof SysUser) {
+        //        sysUser = (SysUser) jdkObservable.getPrincipal();
         //    }
         //    //由于是继承的OncePerRequestFilter，没办法设置session
         //    //这里发现可以将servletReques强转为子类，所以使用request.getsiion())
