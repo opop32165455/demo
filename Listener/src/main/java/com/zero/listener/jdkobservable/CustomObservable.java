@@ -1,4 +1,4 @@
-package com.zero.listener.jdkObservable;
+package com.zero.listener.jdkobservable;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,6 @@ public class CustomObservable extends Observable {
 
     @Override
     protected synchronized void setChanged() {
-
         super.setChanged();
     }
 }

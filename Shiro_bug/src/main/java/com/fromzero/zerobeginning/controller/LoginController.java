@@ -40,8 +40,8 @@ public class LoginController extends ApiController {
 
            Boolean isRememberMe ="true".equals(rememberMe);
             boolean login = loginService.login(user, isRememberMe);
-            // jdkObservable.checkRole("admin");
-         //   jdkObservable.checkPermissions("query", "add");
+            // jdkobservable.checkRole("admin");
+         //   jdkobservable.checkPermissions("query", "add");
         } catch (UnknownAccountException e) {
             log.error("用户名不存在！", e);
             return "用户名不存在！";

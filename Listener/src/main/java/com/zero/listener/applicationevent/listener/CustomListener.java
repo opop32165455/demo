@@ -1,6 +1,6 @@
-package com.zero.listener.applicationEvent.listener;
+package com.zero.listener.applicationevent.listener;
 
-import com.zero.listener.applicationEvent.entity.CustomEvent;
+import com.zero.listener.applicationevent.entity.CustomEvent;
 import io.vavr.Tuple;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -31,10 +31,10 @@ public class CustomListener {
     public static void initTimer() {
         log.info("timer init ... ");
         new ScheduledThreadPoolExecutor(1, r -> new Thread(r, "consumer_timer"))
-                .scheduleAtFixedRate(() -> {
-                    log.info("timer consume data");
-                    print();
-                }, 1, 10, TimeUnit.SECONDS);
+                .scheduleAtFixedRate(() -> { log.info("timer consume data");print(); },
+                        1,
+                        10,
+                        TimeUnit.SECONDS);
 
     }
 
@@ -56,16 +56,15 @@ public class CustomListener {
 
     /**
      * EventListener 的底层原理是 BeanPostProcessor后置处理器
-     *
+     * <p>
      * 本质上 并不是监听和发布并不是一个异步的
      * 在事件发布到容器之后 执行后置处理 然后就会执行注册到listen的一些业务方法
-     *
+     * <p>
      * 底层并没有队列 只有一个存储事件的有序的linked set集合
      * 在发布后必然是要执行才能发布结束的
-     *
+     * <p>
      * 网上文章大部分spring的异步注解 去处理后续的一些任务 达成异步执行
      * 当然也可以自己维护线程池 和一些任务队列 方便增加对大量任务的一些取舍的策略
-     *
      *
      * @param customEvent
      */

@@ -1,18 +1,10 @@
-package com.zero.listener.applicationEvent.listener;
+package com.zero.listener.applicationevent.listener;
 
-import com.zero.listener.applicationEvent.entity.CustomEvent;
-import io.vavr.Tuple;
+import com.zero.listener.applicationevent.entity.CustomEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhangxuecheng4441

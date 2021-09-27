@@ -1,4 +1,4 @@
-package com.zero.listener.applicationEvent.entity;
+package com.zero.listener.applicationevent.entity;
 
 import io.vavr.Tuple;
 import lombok.Builder;

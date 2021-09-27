@@ -1,12 +1,10 @@
-package com.zero.listener.applicationEvent.controller;
+package com.zero.listener.applicationevent.controller;
 
-import com.zero.listener.applicationEvent.entity.CustomEvent;
+import com.zero.listener.applicationevent.entity.CustomEvent;
 import io.vavr.Tuple;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,4 +1,4 @@
-package com.zero.listener.jdkObservable;
+package com.zero.listener.jdkobservable;
 
 import lombok.extern.slf4j.Slf4j;
 
