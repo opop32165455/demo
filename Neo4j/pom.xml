@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fromZero</groupId>
-    <artifactId>neo4j_zero_code</artifactId>
+    <artifactId>neo4j</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>neo4j_zero_code</name>
+    <name>neo4j</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

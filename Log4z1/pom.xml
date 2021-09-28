@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.intellegence</groupId>
-    <artifactId>log4me-test</artifactId>
+    <artifactId>Log4z1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>log4me-test</name>
+    <name>Log4z1</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>

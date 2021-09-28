@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fromZero</groupId>
-    <artifactId>JsonSchema_code</artifactId>
+    <artifactId>JsonSchema</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>JsonSchema_code</name>
+    <name>JsonSchema</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

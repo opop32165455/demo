@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fromZero</groupId>
-    <artifactId>Function_code</artifactId>
+    <artifactId>Function</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Function_code_code</name>
+    <name>Function</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
