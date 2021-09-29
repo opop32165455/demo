@@ -1,7 +1,6 @@
-package com.threads.config;
+package com.example.asyn.pool;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import cn.hutool.core.thread.ThreadUtil;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
