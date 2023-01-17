@@ -46,7 +46,7 @@
 
         <dependency>
             <groupId>com.intelligence</groupId>
-            <artifactId>log4i</artifactId>
+            <artifactId>Log4z2</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

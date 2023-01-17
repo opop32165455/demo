@@ -17,7 +17,10 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 public class EventController {
-
+    static int arr[] = new int[10];
+    public static void main(String a[]) {
+        System.out.println(arr[1]);
+    }
     @Resource
     ApplicationContext applicationContext;
 
