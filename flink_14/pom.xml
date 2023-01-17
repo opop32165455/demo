@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zero</groupId>
-    <artifactId>Flink</artifactId>
+    <artifactId>flink_14</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Flink</name>
+    <name>flink_14</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
