@@ -8,10 +8,10 @@
         <version>2.0.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.fromZero</groupId>
-    <artifactId>Zero</artifactId>
+    <groupId>com.zero</groupId>
+    <artifactId>zero-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Zero</name>
+    <name>zero-web</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -20,15 +20,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.zero</groupId>
+            <artifactId>zero</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -56,12 +57,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.6</version>
-        </dependency>
-        <!-- 超强工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
