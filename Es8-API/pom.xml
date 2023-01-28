@@ -11,7 +11,7 @@
     <groupId>com.fromZero</groupId>
     <artifactId>Es8-API</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Zero</name>
+    <name>Es8-API</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,6 +19,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.zero</groupId>
+            <artifactId>zero</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
          <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

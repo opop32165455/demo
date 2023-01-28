@@ -10,8 +10,8 @@
     </parent>
     <groupId>com.zero</groupId>
     <artifactId>zero</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>zero</name>
+    <version>1.0.0</version>
+    <name>Zero</name>
     <description>base dependencies</description>
 
     <properties>
